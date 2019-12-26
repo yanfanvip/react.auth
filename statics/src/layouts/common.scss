@@ -1,0 +1,16 @@
+.ck{
+    .ck-editor__editable {
+        min-height: 500px;
+        max-height: 500px;
+    }
+}
+
+.input-after-icon{
+    padding-left : 5px;
+    padding-right : 5px;
+    cursor: pointer;
+}
+
+.next-table td .next-table-cell-wrapper .next-icon-arrow-down.next-table-tree-arrow, .next-table td .next-table-cell-wrapper .next-icon-arrow-right.next-table-tree-arrow, .next-table td .next-table-cell-wrapper .next-table-tree-placeholder {
+    margin-top: -2px;
+}
