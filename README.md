@@ -46,3 +46,26 @@
 		});
 	};
 ```
+
+## 权限
+1. 路由和菜单权限已集成至框架中
+2. 按钮权限可导入Auth组件进行校验
+``` javascript
+import { Auth } from '@/components/Auth'
+...
+<Auth auth={'/example/add/button1'}>
+    <Button type="primary" onClick={this.onClick}>提交</Button>
+</Auth>
+```
+3. 代码校验权限规范
+``` javascript
+import { withAuth } from '@/components/Auth'
+...
+<MenuButton label="操作" type="primary" selectMode="single" onItemClick={key => this[key](item) }>
+    <MenuButton.Item key={'add'} disabled={!withAuth('/auth/add')}>新增</MenuButton.Item>
+    <MenuButton.Item key={'edit'} disabled={!withAuth('/auth/edit')}>编辑</MenuButton.Item>
+    <MenuButton.Divider />
+    <MenuButton.Item key={'delete'} disabled={!withAuth('/auth/delete')}>删除</MenuButton.Item>
+</MenuButton>
+```
+
