@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.geekcode.react.controller.BaseAPI;
+import com.geekcode.react.controller.interceptor.Auth;
 import com.geekcode.react.exceptions.CustomizeRuntimeException;
 import com.geekcode.react.model.Response;
 import com.geekcode.react.model.common.T_manager;
@@ -67,28 +68,35 @@ public class ManagerAPI extends BaseAPI{
     }
 	
 	@GetMapping("/info")
+	@Auth
 	public Response<ManagerDetail> info(HttpServletRequest request, HttpServletResponse response) {
 		ManagerDetail manager = SessionUtil.getSession(request, "MANAGER");
 		return SUCCESS(manager);
 	}
 	
 	@GetMapping("/page")
-	public Response<Page<ManagerRole>> tree(@RequestParam int page, 
+	@Auth("/manager/index")
+	public Response<Page<ManagerRole>> page(@RequestParam int page, 
     		@RequestParam(defaultValue="10", required=false) int pageSize) {
 		return SUCCESS(managerService.page(page, pageSize));
 	}
 	
 	@GetMapping("/{id}")
+	@Auth("/manager/index")
 	public Response<T_manager> detail(@PathVariable Long id) {
-		return SUCCESS(managerService.get(id));
+		T_manager manager = managerService.get(id);
+		manager.setPassword("");
+		return SUCCESS(manager);
 	}
 	
 	@PostMapping("/save")
+	@Auth("/manager/add")
 	public Response<T_manager> save(@RequestBody T_manager data) {
 		return SUCCESS(managerService.save(data));
 	}
 	
 	@PostMapping("/delete/{id}")
+	@Auth("/manager/delete")
 	public Response<Void> delete(@PathVariable Long id) {
 		managerService.delete(id);
 		return SUCCESS();

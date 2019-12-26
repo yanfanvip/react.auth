@@ -44,7 +44,7 @@ public class ManagerLoginHandlerInterceptor implements HandlerInterceptor {
 	}
 	
 	public boolean error401(HttpServletResponse response) throws IOException {
-		response.sendError(401, "need login");
+		response.sendError(401, "您还没有登录");
     	return false;
 	}
 }

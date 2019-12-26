@@ -10,6 +10,8 @@ public class InterceptorConfig implements WebMvcConfigurer{
 	
 	@Autowired
 	ManagerLoginHandlerInterceptor managerLoginHandle;
+	@Autowired
+	AuthHandler authHandler;
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -19,7 +21,7 @@ public class InterceptorConfig implements WebMvcConfigurer{
 			.excludePathPatterns("/api/manager/loginout")
 			.excludePathPatterns("/api/manager/verificationcode")
 			.excludePathPatterns("/api/public/**");
-		
+		registry.addInterceptor(authHandler).addPathPatterns("/api/**");
 		WebMvcConfigurer.super.addInterceptors(registry);
 	}
 }

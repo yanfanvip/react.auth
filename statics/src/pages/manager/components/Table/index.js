@@ -27,7 +27,7 @@ export default class UserTable extends Component {
   };
 
   handlePaginationChange = (current) => {
-    this.setState({ current : current }, ()=>{ this.loadList() })
+    this.setState({ current : current - 1 }, ()=>{ this.loadList() })
   };
 
   loadList = async(page) =>{
@@ -39,7 +39,7 @@ export default class UserTable extends Component {
     this.setState({ isLoading : true })
     let data = await Manager.page(page, this.state.filter)
     this.setState({
-      current : data.size,
+      current : data.number,
       total : data.totalElements,
       isLoading : false,
       data : data.content
@@ -89,7 +89,7 @@ export default class UserTable extends Component {
             }}/>
             <Table.Column title="操作" width={100} dataIndex="oper" cell={this.renderOper}/>
           </Table>
-          <Pagination style={styles.pagination} pageSize={10} current={this.state.current} total={this.state.total} onChange={this.handlePaginationChange}/>
+          <Pagination style={styles.pagination} pageSize={10} current={this.state.current + 1} total={this.state.total} onChange={this.handlePaginationChange}/>
         </IceContainer>
       </div>
     );

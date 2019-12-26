@@ -28,5 +28,5 @@ export const save = async(form) =>{
 }
 
 export const del = async(id) =>{
-    return await http.fetchPost(`/api/manager/del/${id}`, {});
+    return await http.fetchPost(`/api/manager/delete/${id}`, {});
 }

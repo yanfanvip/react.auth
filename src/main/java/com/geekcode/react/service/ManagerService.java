@@ -73,6 +73,7 @@ public class ManagerService {
 		}
 		Form_AddRole roleDetail = roleService.getDetail(manager.getRole());
 		ManagerDetail detail = ObjectUtil.convert(manager, ManagerDetail.class);
+		detail.setPassword("");
 		detail.setRole_detail(roleDetail);
 		return detail;
 	}
